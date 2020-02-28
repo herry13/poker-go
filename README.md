@@ -1,14 +1,14 @@
 # Poker Go
 
+[![CircleCI](https://circleci.com/gh/herry13/poker-go.svg?style=svg)](https://circleci.com/gh/herry13/poker-go)
+
 ## Overview
 
 Poker game server implemented in Go language
 
 ## Dependencies
 
-- [Go](https://golang.org)
-- [Golint](https://github.com/golang/lint)
-- [Dep](https://github.com/golang/dep)
+- [Go](https://golang.org) (>= 1.13)
 
 ## Build
 
