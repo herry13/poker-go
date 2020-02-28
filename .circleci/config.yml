@@ -8,14 +8,7 @@ jobs:
     steps:
       - checkout
       - run: mkdir -p $TEST_RESULTS
-      - restore_cache:
-          keys:
-            - go-mod-v4-{{ checksum "go.sum" }}
       - run: make
-      - save_cache:
-          key: go-mod-v4-{{ checksum "go.sum" }}
-          paths:
-            - "go/pkg/mod"
       - store_artifacts: # upload test summary for display in Artifacts
           path: /tmp/test-results
           destination: raw-test-output
