@@ -4,7 +4,7 @@
 
 ## Overview
 
-Poker game server implemented in Go language
+Poker game server implemented in Go language.
 
 ## Dependencies
 
@@ -20,7 +20,7 @@ make build
 
 ## Validate source code
 
-Source code validation is performed using `go vet` and `golint`. To validate the source code:
+Source code validation is performed using `go vet` and `golangci-lint`. To validate the source code:
 
 ```
 make validate
@@ -30,14 +30,5 @@ make validate
 
 ```
 make test
-```
-
-## Adding new dependencies
-
-Dependencies required by `poker_go` should be added using `dep` command.
-For example, to add a dependency on `gopkg.in/yaml.v2` with version `2.2.2`:
-
-```
-dep ensure -add gopkg.in/yaml.v2@2.2.2
 ```
 
