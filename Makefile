@@ -16,7 +16,7 @@ build:
 	go fmt ./...
 	go build $(GO_BUILD_OPTS) -o $(RELEASE_DIR)/$(APP_NAME) $(GIT_REPO)/cmd/$(APP_NAME)
 
-validate: /$(GOLANGCI_LINT)/golangci-lint::
+validate: /$(GOLANGCI_LINT)/golangci-lint
 	go vet $(PKGS)
 	./$(GOLANGCI_LINT)/golangci-lint run
 
