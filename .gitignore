@@ -1,4 +1,11 @@
+# IntelliJ files
 .idea/
-release/
-vendor/*
 
+# Release binary file
+release/
+
+# golangci-lint files
+golangci-lint-*/
+
+# VIM swap files
+.*.swp
