@@ -3,18 +3,19 @@ package main
 import (
 	"math/rand"
 	"time"
+
+	"github.com/herry13/poker-go/pkg/poker"
 )
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	//poker.dealer{}
-	/*table := poker.table{
-		dealer: &dealer{},
-		users: []*user{
-			&user{name: "player1"},
-			&user{name: "player2", isBot: true},
-			&user{name: "player3", isBot: true},
+	table := poker.Table{
+		Dealer: &poker.Dealer{},
+		Users: []*poker.User{
+			&poker.User{Name: "player1"},
+			&poker.User{Name: "player2", IsBot: true},
+			&poker.User{Name: "player3", IsBot: true},
 		},
 	}
-	table.play()*/
+	table.Play()
 }

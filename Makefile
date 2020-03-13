@@ -1,4 +1,4 @@
-APP_NAME         := poker_go
+APP_NAME         := poker
 GIT_REPO         := github.com/herry13/poker-go
 PKGS             := $(shell go list ./... | grep -vF /vendor/)
 RELEASE_DIR      := ./release

@@ -2,35 +2,38 @@ package poker
 
 import "fmt"
 
-type table struct {
-	dealer *dealer
-	users  []*user
+// Table is a poker table
+type Table struct {
+	Dealer *Dealer
+	Users  []*User
 }
 
-type player interface {
-	nextMove() bool // return false if forfeit, otherwise true
+// Player is a poker player who gets turns to play/deal cards.
+type Player interface {
+	NextMove() bool // return false if forfeit, otherwise true
 }
 
-func (t *table) play() {
-	t.dealer.reset()
-	t.dealer.dealCards(t.users)
+// Play starts a poker game
+func (t *Table) Play() {
+	t.Dealer.reset()
+	t.Dealer.dealCards(t.Users)
 
-	players := []player{}
-	for _, u := range t.users {
+	players := []Player{}
+	for _, u := range t.Users {
 		players = append(players, u)
-		fmt.Printf("%s: cards -> %s %s\n", u.name, u.cards[0], u.cards[1])
+		fmt.Printf("%s: cards -> %s %s\n", u.Name, u.Cards[0], u.Cards[1])
 	}
-	players = append(players, t.dealer)
+	players = append(players, t.Dealer)
 
 	// open the first 3 cards
 	for i := 0; i < 3; i++ {
-		t.dealer.openCard()
+		t.Dealer.OpenCard()
 	}
 
-	for len(players) > 2 && !t.dealer.finished {
+	for len(players) > 2 && !t.Dealer.HasFinished() {
 		player := players[0]
 		players = players[1:]
-		if player.nextMove() {
+		if player.NextMove() {
 			players = append(players, player)
 		}
 	}
@@ -39,8 +42,8 @@ func (t *table) play() {
 		fmt.Println("It's a DRAW!")
 	} else {
 		for _, player := range players {
-			if p, ok := player.(*user); ok {
-				fmt.Printf("%v is the winner!\n", p.name)
+			if p, ok := player.(*User); ok {
+				fmt.Printf("%v is the winner!\n", p.Name)
 			}
 		}
 	}

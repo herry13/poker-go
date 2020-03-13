@@ -5,33 +5,35 @@ import (
 	"strconv"
 )
 
-type cardSuit int
+// CardSuit is an enum of the suit of the card
+type CardSuit int
 
 const (
-	clubs cardSuit = iota
+	clubs CardSuit = iota
 	diamonds
 	hearts
 	spades
 )
 
-type cardRank int
+// CardRank is an enum of the suite of the card
+type CardRank int
 
 const (
-	jack cardRank = iota + 11
+	jack CardRank = iota + 11
 	queens
 	kings
 	ace
 )
 
 type card struct {
-	suit cardSuit
-	rank cardRank
+	Suit CardSuit
+	Rank CardRank
 }
 
 func (c card) String() string {
 	var buffer bytes.Buffer
 
-	switch c.suit {
+	switch c.Suit {
 	case clubs:
 		buffer.WriteString("Clubs")
 	case diamonds:
@@ -42,7 +44,7 @@ func (c card) String() string {
 		buffer.WriteString("Spades")
 	}
 	buffer.WriteByte(':')
-	switch c.rank {
+	switch c.Rank {
 	case jack:
 		buffer.WriteString("Jack")
 	case queens:
@@ -52,7 +54,7 @@ func (c card) String() string {
 	case ace:
 		buffer.WriteString("Ace")
 	default:
-		buffer.WriteString(strconv.Itoa(int(c.rank)))
+		buffer.WriteString(strconv.Itoa(int(c.Rank)))
 	}
 
 	return buffer.String()

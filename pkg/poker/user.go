@@ -8,14 +8,16 @@ import (
 	"time"
 )
 
-type user struct {
-	name    string
-	isBot   bool
+// User represents a poker user
+type User struct {
+	Name  string
+	IsBot bool
+	Cards [2]card
+
 	timeout int // in seconds (0 means no timeout)
-	cards   [2]card
 }
 
-func (u *user) getUserInput() string {
+func (u *User) getUserInput() string {
 	timeout := make(chan bool, 1)
 	if u.timeout > 0 {
 		go func() {
@@ -27,7 +29,7 @@ func (u *user) getUserInput() string {
 	userInput := make(chan string, 1)
 	go func() {
 		reader := bufio.NewReader(os.Stdin)
-		fmt.Printf("%v: next move? ", u.name)
+		fmt.Printf("%v: next move? ", u.Name)
 		char, _, err := reader.ReadRune()
 		if err != nil {
 			panic(fmt.Sprintf("%v\n", err))
@@ -51,7 +53,7 @@ func (u *user) getUserInput() string {
 	}
 }
 
-func (u *user) getBotInput() string {
+func (u *User) getBotInput() string {
 	moves := []string{
 		"forfeit",
 		"bet",
@@ -62,13 +64,14 @@ func (u *user) getBotInput() string {
 	return moves[rand.Intn(len(moves))]
 }
 
-func (u *user) nextMove() bool {
+// NextMove gets the next move
+func (u *User) NextMove() bool {
 	var move string
-	if u.isBot {
+	if u.IsBot {
 		move = u.getBotInput()
 	} else {
 		move = u.getUserInput()
 	}
-	fmt.Printf("%s: %s\n", u.name, move)
+	fmt.Printf("%s: %s\n", u.Name, move)
 	return move != "forfeit"
 }
