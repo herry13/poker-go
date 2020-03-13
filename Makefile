@@ -9,16 +9,16 @@ GOLANGCI_LINT_URL := https://github.com/golangci/golangci-lint/releases/download
 
 default: build validate test
 
-/$(GOLANGCI_LINT)/golangci-lint:
-	curl -sL $(GOLANGCI_LINT_URL) | tar xvz
+.tools/$(GOLANGCI_LINT)/golangci-lint:
+	mkdir -p .tools && cd .tools && curl -sL $(GOLANGCI_LINT_URL) | tar xvz
 
 build:
 	go fmt ./...
 	go build $(GO_BUILD_OPTS) -o $(RELEASE_DIR)/$(APP_NAME) $(GIT_REPO)/cmd/$(APP_NAME)
 
-validate: /$(GOLANGCI_LINT)/golangci-lint
+validate: .tools/$(GOLANGCI_LINT)/golangci-lint
 	go vet $(PKGS)
-	./$(GOLANGCI_LINT)/golangci-lint run
+	./.tools/$(GOLANGCI_LINT)/golangci-lint run
 
 test:
 	go test -race ./...

@@ -4,8 +4,8 @@
 # Release binary file
 release/
 
-# golangci-lint files
-golangci-lint-*/
+# tool files
+.tools/
 
 # VIM swap files
 .*.swp
